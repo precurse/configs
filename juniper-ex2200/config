@@ -1,4 +1,4 @@
-## Last changed: 2015-10-12 17:04:16 MDT
+## Last commit: 2015-10-12 18:21:44 MDT by root
 version 12.3R11.2;
 system {
     host-name switchy;
@@ -13,25 +13,6 @@ system {
                 interface vlan.90;
             }
         }
-    }
-    syslog {
-        user * {
-            any emergency;
-        }
-        host logger.signet {
-            port 514;
-        }
-        file messages {
-            any notice;
-            authorization info;
-        }
-        file interactive-commands {
-            interactive-commands any;
-        }
-        ##
-        ## Warning: Syslog server can be enabled only when app-engine is configured
-        ##
-        server;
     }
     ntp {
         server 10.0.3.1;
@@ -65,7 +46,7 @@ interfaces {
                 }
             }
         }
-    }                                   
+    }
     ge-0/0/2 {
         ether-options {
             802.3ad ae0;
@@ -132,7 +113,7 @@ interfaces {
         unit 0 {
             family ethernet-switching {
                 port-mode access;
-                vlan {                  
+                vlan {
                     members INTERNAL;
                 }
             }
@@ -199,7 +180,7 @@ interfaces {
         }
     }
     ge-0/0/19 {
-        unit 0 {                        
+        unit 0 {
             family ethernet-switching {
                 port-mode access;
                 vlan {
@@ -266,7 +247,7 @@ interfaces {
     ge-0/1/3 {
         unit 0 {
             family ethernet-switching;
-        }                               
+        }
     }
     ae0 {
         description ROUTER_LAGG;
@@ -318,6 +299,18 @@ interfaces {
         }
     }
 }
+snmp {
+    location home;
+    contact "andrewklaus@gmail.com";
+    community public {
+        authorization read-only;
+        clients {
+            0.0.0.0/0 restrict;
+            10.0.3.0/24;
+            10.0.0.0/24;
+        }
+    }
+}
 protocols {
     rstp;
     lldp {
@@ -333,7 +326,7 @@ ethernet-switching-options {
     }
 }
 vlans {
-    DMZ {                               
+    DMZ {
         vlan-id 4;
     }
     INTERNAL {
