@@ -1,4 +1,4 @@
-## Last commit: 2015-10-12 18:56:51 MDT by root
+## Last commit: 2015-10-12 20:07:24 MDT by root
 version 12.3R11.2;
 system {
     host-name switchy;
@@ -12,6 +12,11 @@ system {
             http {
                 interface vlan.90;
             }
+        }
+    }
+    syslog {
+        host logger.signet {
+            any error;
         }
     }
     ntp {
@@ -49,22 +54,42 @@ interfaces {
     }
     ge-0/0/2 {
         ether-options {
-            802.3ad ae0;
+            802.3ad {
+                lacp {
+                    force-up;
+                }
+                ae0;
+            }
         }
     }
     ge-0/0/3 {
         ether-options {
-            802.3ad ae0;
+            802.3ad {
+                lacp {
+                    force-up;
+                }
+                ae0;
+            }
         }
     }
     ge-0/0/4 {
         ether-options {
-            802.3ad ae1;
+            802.3ad {
+                lacp {
+                    force-up;
+                }
+                ae1;
+            }
         }
     }
     ge-0/0/5 {
         ether-options {
-            802.3ad ae1;
+            802.3ad {
+                lacp {
+                    force-up;
+                }
+                ae1;
+            }
         }
     }
     ge-0/0/6 {
@@ -255,7 +280,7 @@ interfaces {
             minimum-links 2;
             link-speed 1g;
             lacp {
-                active;
+                passive;
             }
         }
         unit 0 {
@@ -273,7 +298,8 @@ interfaces {
             minimum-links 2;
             link-speed 1g;
             lacp {
-                passive;
+                active;
+                periodic fast;
             }
         }
         unit 0 {
@@ -282,7 +308,7 @@ interfaces {
                 vlan {
                     members all;
                 }
-                native-vlan-id 3;
+                native-vlan-id INTERNAL;
             }
         }
     }
