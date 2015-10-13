@@ -1,4 +1,4 @@
-## Last commit: 2015-10-12 18:21:44 MDT by root
+## Last commit: 2015-10-12 18:56:51 MDT by root
 version 12.3R11.2;
 system {
     host-name switchy;
@@ -300,7 +300,7 @@ interfaces {
     }
 }
 snmp {
-    location home;
+    location uberhaus;
     contact "andrewklaus@gmail.com";
     community public {
         authorization read-only;
@@ -340,4 +340,7 @@ vlans {
         vlan-id 1;
         l3-interface vlan.91;
     }
+}
+poe {
+    interface all;
 }
