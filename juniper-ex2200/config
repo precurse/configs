@@ -1,4 +1,4 @@
-## Last commit: 2015-10-12 20:07:24 MDT by root
+## Last commit: 2015-10-14 21:54:58 MDT by root
 version 12.3R11.2;
 system {
     host-name switchy;
@@ -295,11 +295,10 @@ interfaces {
     ae1 {
         description SMARTOS_LAGG;
         aggregated-ether-options {
-            minimum-links 2;
+            minimum-links 1;
             link-speed 1g;
             lacp {
-                active;
-                periodic fast;
+                passive;
             }
         }
         unit 0 {
@@ -366,7 +365,4 @@ vlans {
         vlan-id 1;
         l3-interface vlan.91;
     }
-}
-poe {
-    interface all;
 }
