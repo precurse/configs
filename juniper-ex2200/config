@@ -1,4 +1,4 @@
-## Last commit: 2015-10-14 21:54:58 MDT by root
+## Last commit: 2015-10-20 21:05:44 MDT by root
 version 12.3R11.2;
 system {
     host-name switchy;
@@ -27,6 +27,11 @@ chassis {
     aggregated-devices {
         ethernet {
             device-count 2;
+        }
+    }
+    alarm {
+        management-ethernet {
+            link-down ignore;
         }
     }
 }
@@ -237,10 +242,11 @@ interfaces {
     ge-0/0/22 {
         unit 0 {
             family ethernet-switching {
-                port-mode access;
+                port-mode trunk;
                 vlan {
-                    members INTERNAL;
+                    members all;
                 }
+                native-vlan-id INTERNAL;
             }
         }
     }
